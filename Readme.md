@@ -3,7 +3,7 @@ This API leverages Flask, a Python web framework, to predict text-based mental w
 
 ## Installation Resources
 ```
-pip install tensorflow flask numpy flask_cors scikit learn
+pip install tensorflow flask numpy flask_cors scikit-learn
 ```
 
 ## API Documentation
