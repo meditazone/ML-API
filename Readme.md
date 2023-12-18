@@ -1,6 +1,9 @@
 # API Machine Learning
 This API leverages Flask, a Python web framework, to predict text-based mental wellbeing. The system categorizes mental health into three main categories: Anxiety, Depression, and Stress.
 
+## Installation Resources
+pip install tensorflow flask numpy flask-cors scikit learn
+
 ## API Documentation
 | Method | Endpoint | Description |
 |-----|-----|-----|
