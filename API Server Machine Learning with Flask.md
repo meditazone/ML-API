@@ -8,7 +8,7 @@ This API leverages Flask, a Python web framework, to predict text-based mental w
 
 ## Example Using API
 
-```json
+```py
 1.  Request using POST method
     http://localhost:5000/predict
 
