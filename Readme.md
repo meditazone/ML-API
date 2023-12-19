@@ -12,3 +12,40 @@ If you want to run this API Server on your local machine, you need to do this st
 
 ## API Endpoint
 If you want to access our Machine Learning API endpoints, you must have already cloned this repository and completed the previous steps. If you have, you can see several Machine Learning API endpoints below and implement them. Here are the API endpoints along with their descriptions:
+
+| Endpoint | Method | Description |
+| ----- | ----- | ----- |
+| / | GET | This endpoint have a function for checking if the response is success |
+| /predict  | POST   | Predict if a user has some emotion based on emotion detection data |
+
+## Example 
+```js
+1.  Request for Emotion Detection using endpoint `/predict`
+     http://localhost:8080/predict
+
+2.  Example of Text testing
+    {
+    "text": "Saya tidak meminta untuk berada di sini. Saya tidak meminta untuk dilahirkan. Saya tidak datang ke dalam hidup ini dengan sukarela. Setidaknya seperti itulah rasanya. Saya diberitahu untuk menyesuaikan diri dengan masyarakat yang tidak memiliki tempat bagi saya, juga tidak menginginkan saya. Mengapa saya harus mendapatkan pekerjaan dan membayar pajak dan tagihan bodoh? Saya tidak mendaftar untuk ini."
+    }
+
+3.  Response for endpoint `/predict`
+    {
+    "predicted_class": "depression",
+    "predictions": [
+        {
+            "class": "anxiety",
+            "probability": 0.007700295653194189
+        },
+        {
+            "class": "depression",
+            "probability": 0.90477454662323
+        },
+        {
+            "class": "stress",
+            "probability": 0.08752521127462387
+        }
+    ],
+    "text": "Saya tidak meminta untuk berada di sini. Saya tidak meminta untuk dilahirkan. Saya tidak datang ke dalam hidup ini dengan sukarela. Setidaknya seperti itulah rasanya. Saya diberitahu untuk menyesuaikan diri dengan masyarakat yang tidak memiliki tempat bagi saya, juga tidak menginginkan saya. Mengapa saya harus mendapatkan pekerjaan dan membayar pajak dan tagihan bodoh? Saya tidak mendaftar untuk ini. "
+    }
+    
+```
