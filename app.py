@@ -36,7 +36,7 @@ def predict_emotion(text):
 
 @app.route('/')
 def index():
-    return 'Hello World!'
+    return 'Hello TEMAN!'
 
 @app.route('/predict', methods=['POST'])
 def predict():
