@@ -19,16 +19,18 @@ If you want to access our Machine Learning API endpoints, you must have already 
 | /predict  | POST   | Predict if a user has some emotion based on emotion detection data |
 
 ## Example 
-```js
 1.  Request for Emotion Detection using endpoint `/predict`
+     ```js
      http://localhost:8080/predict
-
+     ```
 2.  Example of Text testing
+    ```js
     {
     "text": "Saya tidak meminta untuk berada di sini. Saya tidak meminta untuk dilahirkan. Saya tidak datang ke dalam hidup ini dengan sukarela. Setidaknya seperti itulah rasanya. Saya diberitahu untuk menyesuaikan diri dengan masyarakat yang tidak memiliki tempat bagi saya, juga tidak menginginkan saya. Mengapa saya harus mendapatkan pekerjaan dan membayar pajak dan tagihan bodoh? Saya tidak mendaftar untuk ini."
     }
-
+     ```
 3.  Response for endpoint `/predict`
+    ```js
     {
     "predicted_class": "depression",
     "predictions": [
@@ -47,5 +49,5 @@ If you want to access our Machine Learning API endpoints, you must have already 
     ],
     "text": "Saya tidak meminta untuk berada di sini. Saya tidak meminta untuk dilahirkan. Saya tidak datang ke dalam hidup ini dengan sukarela. Setidaknya seperti itulah rasanya. Saya diberitahu untuk menyesuaikan diri dengan masyarakat yang tidak memiliki tempat bagi saya, juga tidak menginginkan saya. Mengapa saya harus mendapatkan pekerjaan dan membayar pajak dan tagihan bodoh? Saya tidak mendaftar untuk ini. "
     }
-    
+    ```
 ```
