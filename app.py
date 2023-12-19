@@ -1,63 +1,58 @@
 from flask import Flask, request, jsonify
-from tensorflow import keras
-from keras.models import load_model
-from keras.preprocessing.sequence import pad_sequences
+from tensorflow.keras.models import load_model
+from tensorflow.keras.preprocessing.sequence import pad_sequences
 import numpy as np
 import pickle
 
 app = Flask(__name__)
 
+# Load the model and tokenizer
+model = load_model('model.h5')
+with open('tokenizer.pkl', 'rb') as tokenizer_file:
+    tokenizer = pickle.load(tokenizer_file)
+
+# Define labels
 labels = ["anxiety", "depression", "stress"]
 
-# Load the tokenizer and model from local storage
-with open('tokenizer.pkl', 'rb') as handle:
-    tokenizer = pickle.load(handle)
-
-model = keras.models.load_model('model.h5')
-
-def prepare_input(text):
+def predict_emotion(text):
+    # Preprocess the input data
     sequences = tokenizer.texts_to_sequences([text])
-    padded = pad_sequences(sequences, maxlen=250, truncating='post', padding='post')
+    padded_data = pad_sequences(sequences, maxlen=250, padding='post', truncating='post')
 
-    return padded
+    # Make predictions using the loaded model
+    predictions = model.predict(padded_data)
 
-def get_prediction(text):
-    # Prepare the input text
-    input_text = prepare_input(text)
-
-    # Use the model to perform predictions
-    predictions = model.predict(input_text)
-
-    # Find the index of the class with the highest probability
-    prediction_index = np.argmax(predictions, axis=1)[0]
-
-     # Create the result dictionary
+    # Process predictions and return the results
     result = {
         'text': text,
         'predictions': [
-            {'class': labels[j], 'probability': float(predictions[0][j]) * 100}  # Multiply by 100 for percentage
+            {'class': labels[j], 'probability': float(predictions[0][j])}
             for j in range(len(predictions[0]))
         ],
-        'predicted_class': labels[prediction_index],
-        'predicted_probability': float(predictions[0][prediction_index] * 100)
+        'predicted_class': labels[np.argmax(predictions[0])]
     }
-    
+
     return result
+
+@app.route('/')
+def index():
+    return 'Hello World!'
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    # Get the input text from the request data
-    data = request.get_json()
-    text = data['text']
+    try:
+        # Validation input
+        data = request.get_json(force=True)
+        if 'text' not in data or not isinstance(data['text'], str):
+            return jsonify({'error': "'text' key not found or not a valid string in data"})
 
-    # Perform predictions using the input text
-    prediction = get_prediction(text)
+        user_text = data['text']
+        result = predict_emotion(user_text)
 
-    # Return the prediction as a JSON response
-    response = {
-        'prediction': prediction
-    }
-    return jsonify(response)
+        return jsonify(result)
+
+    except Exception as e:
+        return jsonify({'error': str(e)})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=8080, debug=True)
