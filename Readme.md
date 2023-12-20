@@ -1,9 +1,7 @@
 # MACHINE LEARNING API-MODEL
 
 ## Description
-```py
-#Coming Soon
-```
+This API leverages Flask a Python web framework, to predict text-based mental wellbeing. The system categoriez mental health into three main categories: Anxiety, Depression, and Stress
 
 ## How To Use This API-Model
 If you want to run this API Server on your local machine, you need to do this steps:
