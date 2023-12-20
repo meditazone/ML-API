@@ -22,32 +22,31 @@ If you want to access our Machine Learning API endpoints, you must have already 
 ## Example 
 1.  Request for Emotion Detection using endpoint `/predict`
      ```js
-     http://localhost:8080/predict
+     http://127.0.0.1:8080/predict
      ```
 2.  Example of Text testing
+    | Key |  Value  |
+    | ----- | ----- |
+    | text | Hari ini jantung ku terasa berdebar debar, muncul tanda tanda kecemasan dan keringat dingin |
+    
+4.  Response for endpoint `/predict`
     ```json
     {
-    "text": "Saya tidak meminta untuk berada di sini. Saya tidak meminta untuk dilahirkan. Saya tidak datang ke dalam hidup ini dengan sukarela. Setidaknya seperti itulah rasanya. Saya diberitahu untuk menyesuaikan diri dengan masyarakat yang tidak memiliki tempat bagi saya, juga tidak menginginkan saya. Mengapa saya harus mendapatkan pekerjaan dan membayar pajak dan tagihan bodoh? Saya tidak mendaftar untuk ini."
-    }
-     ```
-3.  Response for endpoint `/predict`
-    ```json
-    {
-    "predicted_class": "depression",
-    "predictions": [
-        {
-            "class": "anxiety",
-            "probability": 0.007700295653194189
-        },
-        {
-            "class": "depression",
-            "probability": 0.90477454662323
-        },
-        {
-            "class": "stress",
-            "probability": 0.08752521127462387
-        }
-    ],
-    "text": "Saya tidak meminta untuk berada di sini. Saya tidak meminta untuk dilahirkan. Saya tidak datang ke dalam hidup ini dengan sukarela. Setidaknya seperti itulah rasanya. Saya diberitahu untuk menyesuaikan diri dengan masyarakat yang tidak memiliki tempat bagi saya, juga tidak menginginkan saya. Mengapa saya harus mendapatkan pekerjaan dan membayar pajak dan tagihan bodoh? Saya tidak mendaftar untuk ini. "
+         "predicted_class": "anxiety",
+         "predictions": [
+             {
+                 "class": "anxiety",
+                 "probability": 0.8743003010749817
+             },
+             {
+                 "class": "depression",
+                 "probability": 0.0019245089497417212
+             },
+             {
+                 "class": "stress",
+                 "probability": 0.12377515435218811
+             }
+         ],
+         "text": "Hari ini jantung ku terasa berdebar debar, muncul tanda tanda kecemasan dan keringat dingin"
     }
     ```
