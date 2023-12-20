@@ -42,11 +42,11 @@ def index():
 def predict():
     try:
         # Validation input
-        data = request.get_json(force=True)
-        if 'text' not in data or not isinstance(data['text'], str):
+        user_text = request.form.get('text')  
+
+        if user_text is None or not isinstance(user_text, str):
             return jsonify({'error': "'text' key not found or not a valid string in data"})
 
-        user_text = data['text']
         result = predict_emotion(user_text)
 
         return jsonify(result)
